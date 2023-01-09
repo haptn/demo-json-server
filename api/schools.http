@@ -1,0 +1,57 @@
+@baseUrl = http://localhost:3000/api
+@resourceName = schools
+@id = b7ef
+
+
+# @name getAll
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name sort
+GET {{baseUrl}}/{{resourceName}}?_sort=id&_order=asc
+
+###
+
+# @name filter
+GET {{baseUrl}}/{{resourceName}}?name_like=tnhh
+
+###
+
+# @name pagination
+GET {{baseUrl}}/{{resourceName}}?_page=2&_limit=3
+
+###
+
+# @name addNew
+POST {{baseUrl}}/{{resourceName}}
+Content-Type: application/json
+
+{
+  "name": "ATY Tân Bình",
+  "address": "Tân Kỳ Tân Quý, Q. Tân Bình"
+}
+
+###
+
+# @name update
+PATCH  {{baseUrl}}/{{resourceName}}/{{id}}
+Content-Type: application/json
+
+{
+  "address": "Tân Kỳ Tân Quý, Q. Bình Tân"
+}
+
+###
+
+# @name remove
+DELETE  {{baseUrl}}/{{resourceName}}/{{id}}
+Content-Type: application/json
+
+###
+
+# @name getAccountsBySchoolId
+GET {{baseUrl}}/{{resourceName}}/{{id}}/accounts
+
+###
+

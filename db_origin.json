@@ -1,0 +1,55 @@
+{
+  "schools": [
+    {
+      "id": 1,
+      "name": "ATY Quận 1",
+      "address": "Nguyễn Đình Chiểu, Đa Kao, Q1"
+    },
+    {
+      "id": 2,
+      "name": "ATY Quận 12",
+      "address": "Q12"
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn A",
+      "email": "kt.q1@aty.edu.vn",
+      "password": "123",
+      "status": true,
+      "schoolId": 1
+    },
+    {
+      "id": 2,
+      "name": "Trần Thị B",
+      "email": "admin.q1@aty.edu.vn",
+      "password": "123",
+      "status": true,
+      "schoolId": 1
+    },
+    {
+      "id": 3,
+      "name": "Lê Thị C",
+      "email": "kt1.q12@aty.edu.vn",
+      "password": "123",
+      "status": true,
+      "schoolId": 2
+    },
+    {
+      "id": 4,
+      "name": "Phan Văn D",
+      "email": "kt2.q12@aty.edu.vn",
+      "password": "123",
+      "status": false,
+      "schoolId": 2
+    }
+  ],
+  "profile": {
+    "name": "Thúy",
+    "email": "admin@aty.edu.vn",
+    "password": "123",
+    "status": true,
+    "address": "Nguyễn Hữu Thọ, Nhà Bè"
+  }
+}

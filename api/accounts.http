@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3000/api
+@resourceName = accounts
+@id = 0
+
+# @name getAll
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name addNew
+POST {{baseUrl}}/{{resourceName}}
+Content-Type: application/json
+
+# {
+#   body
+# }
+
+###
+
+# @name update
+PATCH  {{baseUrl}}/{{resourceName}}/{{id}}
+Content-Type: application/json
+
+# {
+#   body
+# }
+
+###
+
+# @name remove
+DELETE  {{baseUrl}}/{{resourceName}}/{{id}}
+Content-Type: application/json
+
+###
+
+# @name getAccountsBySchoolId
+GET {{baseUrl}}/{{resourceName}}/{{id}}/accounts
+
+###
+

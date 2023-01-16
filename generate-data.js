@@ -15,16 +15,17 @@ const _convertVNToEn = (strVN = '') => {
   str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o')
   str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u')
   str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y')
-  str = str.replace(/đ/g, 'd')
+  str = str.replace(/đ|Đ|ð/g, 'd')
   return str
 }
 
 const _generateEmail = (name = '') => {
   const arr = name?.split(' ')
-  const lastName = _convertVNToEn(arr[arr?.length - 1])
+  const lastName = _convertVNToEn(arr[arr?.length - 1]?.toLowerCase())
   let shortName = lastName
 
-  shortName += arr?.map(item => item?.slice(0, 1))?.join('')?.toLowerCase()
+  shortName += arr?.map(item => _convertVNToEn(item?.toLowerCase())
+    ?.slice(0, 1))?.join('')
   shortName = shortName?.substring(0, shortName?.length - 1)
 
   return shortName + '@aty.edu.vn'

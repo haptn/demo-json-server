@@ -69,7 +69,7 @@ router.render = (req, res) => {
 server.use('/api', router)
 
 // Start server
-const PORT = process.env.PORT || 3000   // used for deploying on Heroku
+const PORT = process.env.PORT || 3005   // used for deploying on Heroku
 server.listen(PORT, () => {
   console.log('JSON Server is running')
 })

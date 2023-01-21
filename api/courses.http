@@ -1,9 +1,25 @@
 @baseUrl = http://localhost:3005/api
-@resourceName = accounts
-@id = 0
+@resourceName = courses
+@id = b7ef
+
 
 # @name getAll
 GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name sort
+GET {{baseUrl}}/{{resourceName}}?_sort=id&_order=asc
+
+###
+
+# @name filter
+GET {{baseUrl}}/{{resourceName}}?name_like=tnhh
+
+###
+
+# @name pagination
+GET {{baseUrl}}/{{resourceName}}?_page=2&_limit=3
 
 ###
 
@@ -11,9 +27,10 @@ GET {{baseUrl}}/{{resourceName}}
 POST {{baseUrl}}/{{resourceName}}
 Content-Type: application/json
 
-# {
-#   body
-# }
+{
+  "name": "ATY Tân Bình",
+  "address": "Tân Kỳ Tân Quý, Q. Tân Bình"
+}
 
 ###
 
@@ -21,9 +38,9 @@ Content-Type: application/json
 PATCH  {{baseUrl}}/{{resourceName}}/{{id}}
 Content-Type: application/json
 
-# {
-#   body
-# }
+{
+  "address": "Tân Kỳ Tân Quý, Q. Bình Tân"
+}
 
 ###
 

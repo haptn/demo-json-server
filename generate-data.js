@@ -2,6 +2,12 @@
 // const fs = require('fs')
 import { faker } from '@faker-js/faker'
 import fs from 'fs'
+import {
+  _generateEmail,
+  _generateSchoolStatus,
+  _generateStaffStatus,
+  _generateRole
+} from './config/helpers.js'
 
 // Set locale to use Vietnamese
 faker.locale = 'vi'
@@ -255,15 +261,19 @@ const randomAccountList = (schoolsList, numOfAccounts) => {
 
   for (const school of schoolsList) {
     Array.from(new Array(numOfAccounts)).forEach(() => {
+      const name = faker.name.lastName() + ' ' + faker.name.firstName()
+
       const account = {
         schoolId: school?.id,
         id: faker.datatype.uuid(),
-        name: faker.name.lastName() + ' ' + faker.name.firstName(),
-        email: faker.internet.email(),
+        name,
+        email: _generateEmail(name),
+        phone: faker.phone.number('0#########'),
+        role: _generateRole(),
         password: faker.datatype.uuid().slice(0, 6),
         avatar: faker.image.avatar(),
         address: faker.address.streetAddress() + ', ' + faker.address.stateAbbr(),
-        status: faker.datatype.boolean(),
+        status: _generateStaffStatus(),
         createdAt: Date.now(),
         updatedAt: Date.now()
       }

@@ -1,5 +1,7 @@
+import { staffStatus } from "./constants.js"
+
 // ============ Helpers (Functions) ============
-const _convertVNToEn = (strVN = '') => {
+export const _convertVNToEn = (strVN = '') => {
   let str = strVN
   str = str.toLowerCase()
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
@@ -13,32 +15,32 @@ const _convertVNToEn = (strVN = '') => {
 }
 
 // ============ Generators (Functions) ============
-export const _generateEmail = (name = '') => {
-  const arr = name?.split(' ')
-  const lastName = _convertVNToEn(arr[arr?.length - 1]?.toLowerCase())
-  let shortName = lastName
+const generate = {
+  EMAIL: (name = '') => {
+    const arr = name?.split(' ')
+    const lastName = _convertVNToEn(arr[arr?.length - 1]?.toLowerCase())
+    let shortName = lastName
 
-  shortName += arr?.map(item => _convertVNToEn(item?.toLowerCase())
-    ?.slice(0, 1))?.join('')
-  shortName = shortName?.substring(0, shortName?.length - 1)
+    shortName += arr?.map(item => _convertVNToEn(item?.toLowerCase())
+      ?.slice(0, 1))?.join('')
+    shortName = shortName?.substring(0, shortName?.length - 1)
 
-  return shortName + '@aty.edu.vn'
+    return shortName + '@aty.edu.vn'
+  },
+  // SCHOOL_STATUS: () => {
+  //   const status = Math.round(Math.random() * 2)
+  //   return status === 1 ? 'Đang hoạt động'
+  //     : status === 2 ? 'Sắp hoạt động' : 'Tạm đóng'
+  // },
+  STAFF_STATUS: () => {
+    const status = Math.round(Math.random())
+    return status === 1 ? staffStatus.WORKING : staffStatus.QUITTED
+  },
+  // USER_ROLE: () => {
+  //   const roleId = Math.round(Math.random() * 10)
+  //   return roleId === 1 ? 'Admin trường'
+  //     : roleId === 2 ? 'Admin ATY' : 'Kế toán'
+  // }
 }
 
-export const _generateSchoolStatus = () => {
-  const status = Math.round(Math.random() * 2)
-  return status === 1 ? 'Đang hoạt động'
-    : status === 2 ? 'Sắp hoạt động' : 'Tạm đóng'
-}
-
-export const _generateStaffStatus = () => {
-  const status = Math.round(Math.random())
-  return status === 1 ? 'Đang làm' : 'Đã nghỉ'
-}
-
-export const _generateRole = () => {
-  const roleId = Math.round(Math.random() * 10)
-
-  return roleId === 1 ? 'Admin trường'
-    : roleId === 2 ? 'Admin ATY' : 'Kế toán'
-}
+export default generate

@@ -52,7 +52,7 @@ const list = {
     {
       id: '1',
       name: 'Học kỳ quân đội Bộ binh sơ cấp',
-      price: '8.000.000đ',
+      price: 8000000,
       description: '7-17 tuổi',
       status: courseStatus.READIED,
       schoolId: null,       // áp dụng cho...: null --> all schools | [...schoolIds]
@@ -62,7 +62,7 @@ const list = {
     {
       id: '2',
       name: 'Học kỳ quân đội Nâng cao',
-      price: '11.000.000đ',
+      price: 11000000,
       description: '12-18 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -72,7 +72,7 @@ const list = {
     {
       id: '3',
       name: 'Hi! Teacher',
-      price: '6.000.000đ',
+      price: 6000000,
       description: '7-12 tuổi',
       status: courseStatus.PAUSED,
       schoolId: null,
@@ -82,7 +82,7 @@ const list = {
     {
       id: '4',
       name: 'International Bootcamp Bình Định',
-      price: '5.000.000đ',
+      price: 5000000,
       description: '7-17 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -92,7 +92,7 @@ const list = {
     {
       id: '5',
       name: 'Bootcamp Kid Extreme',
-      price: '12.000.000đ',
+      price: 12000000,
       description: '7-12 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -102,7 +102,7 @@ const list = {
     {
       id: '6',
       name: 'Bootcamp Teen Extreme',
-      price: '15.000.000đ',
+      price: 15000000,
       description: '12-18 tuổi',
       status: courseStatus.COMING_SOON,
       schoolId: null,
@@ -112,7 +112,7 @@ const list = {
     {
       id: '7',
       name: 'Phát triển kỹ năng lãnh đạo',
-      price: '10.000.000đ',
+      price: 10000000,
       description: '12-20 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -122,7 +122,7 @@ const list = {
     {
       id: '8',
       name: 'Teen Leaders',
-      price: '20.000.000đ',
+      price: 20000000,
       description: '12-20 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -132,7 +132,7 @@ const list = {
     {
       id: '9',
       name: 'Pre-Teen Leaders',
-      price: '0đ',
+      price: 0,
       description: '12-20 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -142,7 +142,7 @@ const list = {
     {
       id: '10',
       name: 'Siêu Trí tuệ Teen-Kid',
-      price: '6.000.000đ',
+      price: 6000000,
       description: '7-15 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -152,7 +152,7 @@ const list = {
     {
       id: '11',
       name: 'Sống mạnh mẽ',
-      price: '4.000.000đ',
+      price: 4000000,
       description: '6-12 tuổi',
       status: courseStatus.READIED,
       schoolId: null,
@@ -162,7 +162,7 @@ const list = {
     {
       id: '12',
       name: 'Học làm người nông dân',
-      price: '5.000.000đ',
+      price: 5000000,
       description: '7-12 tuổi',
       status: courseStatus.PAUSED,
       schoolId: null,
@@ -172,7 +172,7 @@ const list = {
     {
       id: '13',
       name: 'Thám du',
-      price: '4.000.000đ',
+      price: 4000000,
       description: '10-15 tuổi',
       status: courseStatus.COMING_SOON,
       schoolId: null,
@@ -182,7 +182,7 @@ const list = {
     {
       id: '14',
       name: 'Tư duy tích cực',
-      price: '4.000.000đ',
+      price: 4000000,
       description: '12 tuổi trở lên',
       status: courseStatus.READIED,
       schoolId: null,
@@ -192,7 +192,7 @@ const list = {
     {
       id: '15',
       name: 'Dân vũ',
-      price: '2.000.000đ',
+      price: 2000000,
       description: 'Không giới hạn độ tuổi',
       status: courseStatus.READIED,
       schoolId: null,

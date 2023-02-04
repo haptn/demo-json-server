@@ -2,7 +2,9 @@
 // const jsonServer = require('json-server')
 import queryString from 'query-string'
 import jsonServer from 'json-server'
+import cors from 'cors'
 const server = jsonServer.create()
+server.use(cors())
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
@@ -70,6 +72,4 @@ server.use('/api', router)
 
 // Start server
 const PORT = process.env.PORT || 3005   // used for deploying on Heroku
-server.listen(PORT, () => {
-  console.log('JSON Server is running')
-})
+server.listen(PORT, '127.0.0.1')

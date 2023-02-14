@@ -57,17 +57,19 @@ const randomList = {
     const list = []
 
     for (const school of listSchools) {
-      Array.from(new Array(faker.datatype.number({ min: 1, max: 5 }))).forEach(() => {
-        const _class = {
-          schoolId: school?.id,
-          id: faker.datatype.uuid()?.slice(0, 4),
-          name: faker.random.numeric(1, { bannedDigits: ['0', '1', '2', '3', '4', '5'] }) + 'A' + faker.random.numeric(1, { bannedDigits: ['0'] }),
-          classSize: faker.datatype.number({ min: 15, max: 25 }),
-          createdAt: Date.now(),
-          updatedAt: Date.now()
-        }
-
-        list.push(_class)
+      Array.from([6, 7, 8, 9, 10, 11]).forEach(grade => {
+        Array.from(new Array(faker.datatype.number({ min: 1, max: 3 })))
+          .forEach((_, classNo) => {
+            const _class = {
+              schoolId: school?.id,
+              id: grade + 'A' + (classNo + 1),
+              name: grade + 'A' + (classNo + 1),
+              classSize: faker.datatype.number({ min: 15, max: 25 }),
+              createdAt: Date.now(),
+              updatedAt: Date.now()
+            }
+            list.push(_class)
+          })
       })
     }
 
@@ -77,12 +79,24 @@ const randomList = {
     const list = []
 
     for (const school of listSchools) {
-      Array.from(new Array(faker.datatype.number({ min: 2, max: 10 }))).forEach(() => {
+      Array.from(new Array(faker.datatype.number({ min: 2, max: 10 }))).forEach((_, idx) => {
+        const name = faker.name.lastName() + ' ' + faker.name.firstName()
+        const staffId = generate.SHORT_NAME(name) + (idx + 1)
+        const basicSalary = faker.datatype.number({ min: 5, max: 20 }) + '000000'  // 5tr-20tr
+
         const _class = {
           schoolId: school?.id,
           id: faker.datatype.uuid()?.slice(0, 4),
-          name: faker.name.lastName() + ' ' + faker.name.firstName(),
+          staffId,
+          name,
+          email: generate.EMAIL(name),
+          taxCode: faker.phone.number('8############'),
+          basicSalary,
+          insuranceSalary: generate.STAFF_INSURANCE_SALARY(basicSalary),
+          allowance: faker.datatype.number({ min: 1, max: 2 }) + faker.datatype.number(9) + '00000',
+          otherAllowance: generate.STAFF_OTHER_ALLOWANCE(),
           jobType: faker.name.jobType(),
+          bank: generate.STAFF_BANK(name),
           createdAt: Date.now(),
           updatedAt: Date.now()
         }

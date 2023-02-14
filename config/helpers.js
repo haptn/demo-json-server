@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker"
 import { staffStatus } from "./constants.js"
 
 // ============ Helpers (Functions) ============
@@ -16,7 +17,7 @@ export const _convertVNToEn = (strVN = '') => {
 
 // ============ Generators (Functions) ============
 const generate = {
-  EMAIL: (name = '') => {
+  SHORT_NAME: (name = '') => {
     const arr = name?.split(' ')
     const lastName = _convertVNToEn(arr[arr?.length - 1]?.toLowerCase())
     let shortName = lastName
@@ -25,7 +26,19 @@ const generate = {
       ?.slice(0, 1))?.join('')
     shortName = shortName?.substring(0, shortName?.length - 1)
 
-    return shortName + '@aty.edu.vn'
+    return shortName
+  },
+  EMAIL: (name = '') => {
+    // const arr = name?.split(' ')
+    // const lastName = _convertVNToEn(arr[arr?.length - 1]?.toLowerCase())
+    // let shortName = lastName
+
+    // shortName += arr?.map(item => _convertVNToEn(item?.toLowerCase())
+    //   ?.slice(0, 1))?.join('')
+    // shortName = shortName?.substring(0, shortName?.length - 1)
+
+    // return shortName + '@aty.edu.vn'
+    return generate.SHORT_NAME(name) + '@aty.edu.vn'
   },
   // SCHOOL_STATUS: () => {
   //   const status = Math.round(Math.random() * 2)
@@ -34,8 +47,41 @@ const generate = {
   // },
   STAFF_STATUS: () => {
     const status = Math.round(Math.random())
-    return status === 1 ? staffStatus.WORKING : staffStatus.QUITTED
+    return status > 0 ? staffStatus.WORKING : staffStatus.QUITTED
   },
+  STAFF_INSURANCE_SALARY: salary => {
+    return Math.round(Math.random()) > 0 ? salary : '5010000'
+  },
+  STAFF_OTHER_ALLOWANCE: () => {
+    return Math.round(Math.random()) > 0 ? '500000' : '0'
+  },
+  STAFF_BANK: (name = '') => {
+    let bankName = ''
+
+    switch (Math.round(Math.random() * 5)) {
+      case 0:
+        bankName = 'Vietcombank'
+        break
+      case 1:
+        bankName = 'Vietinbank'
+        break
+      case 2:
+        bankName = 'TPBank'
+        break
+      case 3:
+        bankName = 'Sacombank'
+        break
+      default:
+        bankName = 'BIDV'
+        break;
+    }
+
+    return ({
+      bankName,
+      bankAccount: faker.finance.account(12),
+      bankAccountOwner: _convertVNToEn(name).toUpperCase()
+    })
+  }
   // USER_ROLE: () => {
   //   const roleId = Math.round(Math.random() * 10)
   //   return roleId === 1 ? 'Admin trường'

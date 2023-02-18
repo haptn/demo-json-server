@@ -1,4 +1,7 @@
 // ============ Constants ============
+export const BASE_SALARY = 1490000   // mức lương cơ sở (1,49tr/tháng) =/= lương tối thiểu vùng (5tr010)
+
+
 export const userRole = {
   ACCOUNTER: 'Kế toán',
   SCHOOL_ADMIN: 'Admin trường',

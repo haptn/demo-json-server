@@ -23,7 +23,7 @@ const list = {
     {
       id: '3',
       name: 'Trường Thủ Khoa Huân',
-      type: schoolType.ESCALATOR,
+      type: schoolType.HIGH,
       phone: '0902950008',
       address: '481/8 Trường Chinh, Phường 14, Quận Tân Bình, Tp.HCM',
       status: schoolStatus.WORKING,
@@ -32,7 +32,7 @@ const list = {
     {
       id: '4',
       name: 'Hệ thống Giáo dục ATY',
-      type: schoolType.HIGH,
+      type: schoolType.ESCALATOR,
       phone: '028 22433990',
       address: 'Quận 12, Tp.HCM',
       status: schoolStatus.WORKING,
@@ -246,7 +246,7 @@ const list = {
         {
           id: '1.7',
           name: 'Bậc lương, thưởng, phụ cấp',
-          pathName: '/settings/salary',
+          pathName: '/settings/salary-levels',
         },
         {
           id: '1.8',
@@ -494,64 +494,67 @@ const list = {
       symbol: '¥'
     },
   ],
-  TAXES: [
-    {
-      id: '1',
-      name: 'Thuế giá trị gia tăng',
-      shortName: 'GTGT',
-      value: 5,
-      unit: '%',
-      status: taxStatus.ACTIVE
-    },
-    {
-      id: '2',
-      name: 'Thuế thu nhập cá nhân',
-      shortName: 'TNCN',
-      value: '',
-      unit: '%',
-      status: taxStatus.ACTIVE
-    },
-    {
-      id: '3',
-      name: 'Thuế thu nhập doanh nghiệp',
-      shortName: 'TNDN',
-      value: 20,
-      unit: '%',
-      status: taxStatus.ACTIVE
-    },
-    {
-      id: '4',
-      name: 'Thuế môn bài',
-      shortName: '',
-      value: 3000000,
-      unit: 'đồng',
-      status: taxStatus.ACTIVE
-    },
-    {
-      id: '5',
-      name: 'Thuế tài nguyên',
-      shortName: '',
-      value: '',
-      unit: '%',
-      status: taxStatus.INACTIVE
-    },
-    {
-      id: '6',
-      name: 'Thuế xuất nhập khẩu',
-      shortName: '',
-      value: '',
-      unit: '%',
-      status: taxStatus.INACTIVE
-    },
-    {
-      id: '7',
-      name: 'Thuế bảo vệ môi trường',
-      shortName: '',
-      value: '',
-      unit: '%',
-      status: taxStatus.INACTIVE
-    },
-  ],
+  TAXES: {
+    LIST: [],
+    TYPE: [
+      {
+        id: '1',
+        name: 'Thuế giá trị gia tăng',
+        shortName: 'GTGT',
+        value: 5,
+        unit: '%',
+        status: taxStatus.ACTIVE
+      },
+      {
+        id: '2',
+        name: 'Thuế thu nhập cá nhân',
+        shortName: 'TNCN',
+        value: '',
+        unit: '%',
+        status: taxStatus.ACTIVE
+      },
+      {
+        id: '3',
+        name: 'Thuế thu nhập doanh nghiệp',
+        shortName: 'TNDN',
+        value: 20,
+        unit: '%',
+        status: taxStatus.ACTIVE
+      },
+      {
+        id: '4',
+        name: 'Thuế môn bài',
+        shortName: '',
+        value: 3000000,
+        unit: 'đồng',
+        status: taxStatus.ACTIVE
+      },
+      {
+        id: '5',
+        name: 'Thuế tài nguyên',
+        shortName: '',
+        value: '',
+        unit: '%',
+        status: taxStatus.INACTIVE
+      },
+      {
+        id: '6',
+        name: 'Thuế xuất nhập khẩu',
+        shortName: '',
+        value: '',
+        unit: '%',
+        status: taxStatus.INACTIVE
+      },
+      {
+        id: '7',
+        name: 'Thuế bảo vệ môi trường',
+        shortName: '',
+        value: '',
+        unit: '%',
+        status: taxStatus.INACTIVE
+      },
+    ]
+  },
   TUITION_FEES: [
     {
       id: '',
@@ -565,67 +568,82 @@ const list = {
       {
         id: 's1',
         name: 'GV cơ hữu',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's2',
         name: 'GV thỉnh giảng',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's3',
         name: 'GV Bộ môn',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's4',
         name: 'GV tiếng Anh',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's5',
         name: 'GV tiếng Nhật',
-        value: ''
-      },
-      {
-        id: 's6',
-        name: 'GV Thể dục',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's7',
         name: 'Quản sinh KTX',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's8',
         name: 'Kế toán',
-        value: ''
+        level: 1,
+        value: 0,
       },
       {
         id: 's9',
         name: 'Nhân viên kinh doanh',
-        value: ''
+        level: 1,
+        value: 0,
+        description: 'Thu nhập 1 tháng = Lương + thưởng KPI'
       },
       {
         id: 's10',
         name: 'Nhân viên Tuyển sinh',
-        value: ''
+        level: 1,
+        value: 0,
+        description: 'Thu nhập 1 tháng = Lương + thưởng KPI'
       },
       {
         id: 's11',
-        name: 'Bảo mẫu',
-        value: ''
+        name: 'Bảo mẫu bán trú',
+        level: 1,
+        value: 0,
       },
       {
         id: 's12',
         name: 'Nhân viên vệ sinh',
-        value: ''
+        level: 1,
+        value: 0,
+      },
+      {
+        id: 's6',
+        name: 'Bảo vệ',
+        level: 1,
+        value: 0,
       },
       {
         id: 's13',
-        name: 'Bảo vệ',
-        value: ''
+        name: 'Giám đốc',
+        level: 1,
+        value: 0,
       },
     ],
     BONUS: [
@@ -633,7 +651,7 @@ const list = {
         id: 'b1',
         name: 'Lương T13',
         value: '',
-        description: '1 tháng lương'
+        description: '1 tháng lương, tùy thuộc vào lương mỗi người mà giá trị sẽ khác nhau'
       },
       {
         id: 'b2',
@@ -645,7 +663,7 @@ const list = {
         id: 'b3',
         name: 'Thưởng hiệu quả công việc',
         value: '',
-        description: ''
+        description: '+5% vào lương tháng đó'
       },
       {
         id: 'b4',
@@ -658,20 +676,20 @@ const list = {
       {
         id: 'a1',
         name: 'Phụ cấp Thâm niên',
-        value: '',
-        description: '1 tháng lương'
+        value: '200.000 đ/tháng',
+        description: 'Cứ sau mỗi 2 năm thâm niên, cộng trực tiếp vào lương cứng 200.000 đ/tháng'
       },
       {
         id: 'a2',
         name: 'Phụ cấp Phụ đạo',
-        value: '',
+        value: '100.000 đ/buổi/2 tiếng',
         description: '1 tháng lương'
       },
       {
         id: 'a3',
         name: 'Phụ cấp Chứng chỉ chuyên môn',
-        value: '',
-        description: ''
+        value: '100.000 đ - 200.000 đ/chứng chỉ',
+        description: 'Phụ cấp tùy thuộc vào độ khó và độ phổ biến của từng loại chứng chỉ'
       },
     ]
   },

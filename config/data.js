@@ -48,7 +48,7 @@ const list = {
       taxCode: '0310449557-004',
     },
   ],
-  COURSES: [
+  COURSES: [    // Này là danh mục tất cả các khóa (trong phần thiết lập chung)
     {
       id: '1',
       name: 'Học kỳ quân đội Bộ binh sơ cấp',
@@ -200,6 +200,18 @@ const list = {
       updatedAt: Date.now(),
     },
   ],
+  // CURRENT_COURSES: [    // Này là list tất cả các khóa đc tổ chức (đã/đang/sẽ)
+  //   {
+  //     id: '1',
+  //     name: 'Học kỳ quân đội Bộ binh sơ cấp-1',
+  //     price: 8000000,
+  //     description: '7-17 tuổi',
+  //     status: courseStatus.READIED,
+  //     schoolId: null,       // áp dụng cho...: null --> all schools | [...schoolIds]
+  //     createdAt: Date.now(),
+  //     updatedAt: Date.now(),
+  //   },
+  // ],
   SETTINGS: [
     {
       id: '1',
@@ -609,14 +621,14 @@ const list = {
       },
       {
         id: 's9',
-        name: 'Nhân viên kinh doanh',
+        name: 'NV kinh doanh',
         level: 1,
         value: 0,
         description: 'Thu nhập 1 tháng = Lương + thưởng KPI'
       },
       {
         id: 's10',
-        name: 'Nhân viên Tuyển sinh',
+        name: 'NV tuyển sinh',
         level: 1,
         value: 0,
         description: 'Thu nhập 1 tháng = Lương + thưởng KPI'
@@ -629,7 +641,7 @@ const list = {
       },
       {
         id: 's12',
-        name: 'Nhân viên vệ sinh',
+        name: 'NV vệ sinh',
         level: 1,
         value: 0,
       },

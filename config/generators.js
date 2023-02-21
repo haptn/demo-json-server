@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import generate from './helpers.js'
 import { BASE_SALARY, staffStatus, userRole } from './constants.js'
 import configData from './data.js'
+import dayjs from 'dayjs'
 
 // Set locale to use Vietnamese
 faker.locale = 'vi'
@@ -75,11 +76,11 @@ const randomList = {
             })
         })
       }
-      else {
-        Array.from([
-          'Bộ binh sơ cấp',
-          'Nâng cao Đà Nẵng',
-          'Nâng cao Bình Định',
+      else if (school?.id === '1') {
+        Array.from([  // temp
+          'Học kỳ quân đội Bộ binh sơ cấp',
+          'Học kỳ quân đội Nâng cao Đà Nẵng',
+          'Học kỳ quân đội Nâng cao Bình Định',
           'Bootcamp Kid Extreme',
           'Bootcamp Teen Extreme',
           'Teen Leaders Nhật Bản',
@@ -92,7 +93,7 @@ const randomList = {
                 schoolId: school?.id,
                 id: school?.id + '-' + course + '-' + (classNo + 1),
                 name: course + '-' + (classNo + 1),
-                classSize: faker.datatype.number({ min: 15, max: 25 }),
+                classSize: faker.datatype.number({ min: 30, max: 60 }),
                 status: school?.status,
                 createdAt: Date.now(),
                 updatedAt: Date.now()
@@ -121,9 +122,12 @@ const randomList = {
 
     for (const school of listSchools) {
       Array.from(new Array(faker.datatype.number({ min: 8, max: 20 }))).forEach((_, idx) => {
+        const _salaryLevels = configData.SALARY_LEVELS.SALARY
+        const _salaryLevel = _salaryLevels[idx % _salaryLevels.length]
+
         const name = faker.name.lastName() + ' ' + faker.name.firstName()
         const staffId = generate.SHORT_NAME(name) + (idx + 1)
-        const basicSalary = configData.SALARY_LEVELS.SALARY[idx + 1]?.value //  + '000000'  // 5tr-15tr
+        const basicSalary = _salaryLevel?.value //  + '000000'  // 5tr-15tr
         const insuranceSalary = generate.STAFF_INSURANCE_SALARY(basicSalary)
 
         const _class = {
@@ -134,7 +138,7 @@ const randomList = {
           email: generate.EMAIL(name),
           phone: faker.phone.number('0#########'),
           taxCode: faker.phone.number('8############'),
-          salaryLevel: configData.SALARY_LEVELS.SALARY[idx + 1]?.level,  // hệ số lương
+          salaryLevel: _salaryLevel?.level,  // hệ số lương
           basicSalary,  // lương cơ bản (=/= lương cơ sở (BASE_SALARY))
           bonus: 200000,  // thưởng
           OT: 0,  // OT (làm thêm)
@@ -155,7 +159,7 @@ const randomList = {
           bhytATY: 0.03 * insuranceSalary,  // BHYT ATY phải đóng cho người lao động
           bhtnATY: 0.01 * insuranceSalary,   // BHTN ATY phải đóng cho người lao động
           unionFee: 0.01 * 0.85 * basicSalary,   // công đoàn phí: 1% lương thực lãnh (cty đóng, người lao động ko đóng)
-          jobPosition: configData.SALARY_LEVELS.SALARY[idx + 1]?.name,
+          jobPosition: _salaryLevel?.name,
           bank: generate.STAFF_BANK(name),
           status: generate.STAFF_STATUS(),
           createdAt: Date.now(),
@@ -171,19 +175,33 @@ const randomList = {
   STUDENTS: (listClasses) => {
     const list = []
 
+    // let idCount = 0
     for (const _class of listClasses) {
-      Array.from(new Array(faker.datatype.number({ min: 15, max: 25 }))).forEach(() => {
+      if (!['1', '3', '4'].includes(_class?.schoolId)) continue
+
+      Array.from(new Array(_class?.classSize)).forEach((_, idx) => {
         const student = {
           classId: _class?.id,
+          schoolId: _class?.schoolId,
+          // id: `${idCount * _class?.classSize + idx}`,
           id: faker.datatype.uuid()?.slice(0, 4),
           name: faker.name.lastName() + ' ' + faker.name.firstName(),
-          parentName: faker.name.lastName() + ' ' + faker.name.firstName(),   // ko biết có cần ko nữa
+          nickName: '',
+          dob: dayjs(faker.date.birthdate({ min: 2002, max: 2012 })).format('DD-MM-YYYY'),
+          email: faker.datatype.boolean() ? faker.internet.email() : '',
+          phone: faker.datatype.boolean() ? faker.phone.number('0#########') : '',
+          parent: {
+            name: (faker.datatype.boolean() ? '(Ba) ' : '(Mẹ) ') + faker.name.firstName(),
+            phone: faker.phone.number('0#########'),
+            email: faker.datatype.boolean() ? faker.internet.email() : '',
+          },
           createdAt: Date.now(),
           updatedAt: Date.now()
         }
 
         list.push(student)
       })
+      // idCount++
     }
 
     return list

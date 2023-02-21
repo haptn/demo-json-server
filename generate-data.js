@@ -13,7 +13,8 @@ const getSidebarMenu = () => {
   // Data
   // const listSchools = randomListSchools(6)
   const listClasses = randomList.CLASSES(list.SCHOOLS)
-  // const studentsList = randomList.STUDENTS(listClasses)
+  // const listStudentsOfClasses = randomList.STUDENTS_OF_CLASSES(listClasses)
+  // const listStudentsOfCourses = randomList.STUDENTS_OF_COURSES(listClasses)
   // const staffsList = randomList.STAFFS(list.SCHOOLS)
   // const accountsList = randomList.ACCOUNTS(list.SCHOOLS, 3)
 
@@ -34,6 +35,9 @@ const getSidebarMenu = () => {
     allowance: list.SALARY_LEVELS.ALLOWANCE,
     staffs: randomList.STAFFS(list.SCHOOLS),
     students: randomList.STUDENTS(listClasses),
+    // students: [...listStudentsOfClasses, ...listStudentsOfCourses],
+    // 'students-of-classes': listStudentsOfClasses,
+    // 'students-of-courses': listStudentsOfCourses,
     accounts: randomList.ACCOUNTS(list.SCHOOLS, 3),
 
     profile: { name: 'Phạm Thị Ngọc Hà' }

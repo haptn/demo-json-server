@@ -1,4 +1,4 @@
-import { courseStatus, paymentMethod, schoolStatus, schoolType, taxStatus } from './constants.js'
+import { classStatus, courseStatus, paymentMethod, schoolStatus, schoolType, taxStatus } from './constants.js'
 
 const list = {
   SCHOOLS: [
@@ -200,18 +200,88 @@ const list = {
       updatedAt: Date.now(),
     },
   ],
-  // CURRENT_COURSES: [    // Này là list tất cả các khóa đc tổ chức (đã/đang/sẽ)
-  //   {
-  //     id: '1',
-  //     name: 'Học kỳ quân đội Bộ binh sơ cấp-1',
-  //     price: 8000000,
-  //     description: '7-17 tuổi',
-  //     status: courseStatus.READIED,
-  //     schoolId: null,       // áp dụng cho...: null --> all schools | [...schoolIds]
-  //     createdAt: Date.now(),
-  //     updatedAt: Date.now(),
-  //   },
-  // ],
+  CURRENT_COURSES: [    // Này là list tất cả các khóa đc tổ chức (đã/đang/sẽ)
+    {
+      id: '1',
+      courseId: '1',  // id trong danh mục
+      name: 'Học kỳ quân đội Bộ binh sơ cấp',
+      status: classStatus.PERFORMING,
+      minStudents: 30,
+      maxStudents: 60,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '2',
+      courseId: '2',  // id trong danh mục
+      name: 'Học kỳ quân đội Nâng cao Đà Nẵng',
+      status: classStatus.ENROLLING,
+      minStudents: 30,
+      maxStudents: 60,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '3',
+      courseId: '2',  // id trong danh mục
+      name: 'Học kỳ quân đội Nâng cao Bình Định',
+      status: classStatus.COMING_SOON,
+      minStudents: 30,
+      maxStudents: 60,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '4',
+      courseId: '5',  // id trong danh mục
+      name: 'Bootcamp Kid Extreme',
+      status: classStatus.ENDED,
+      minStudents: 20,
+      maxStudents: 40,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '5',
+      courseId: '6',  // id trong danh mục
+      name: 'Bootcamp Teen Extreme',
+      status: classStatus.PERFORMING,
+      minStudents: 25,
+      maxStudents: 50,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '6',
+      courseId: '8',  // id trong danh mục
+      name: 'Teen Leaders Nhật Bản',
+      status: classStatus.ENROLLING,
+      minStudents: 15,
+      maxStudents: 25,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '7',
+      courseId: '8',  // id trong danh mục
+      name: 'Teen Leaders Mỹ',
+      status: classStatus.COMING_SOON,
+      minStudents: 12,
+      maxStudents: 25,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+    {
+      id: '8',
+      courseId: '10',  // id trong danh mục
+      name: 'Siêu Trí tuệ Teen-Kid',
+      status: classStatus.PERFORMING,
+      minStudents: 8,
+      maxStudents: 20,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    },
+  ],
   SETTINGS: [
     {
       id: '1',

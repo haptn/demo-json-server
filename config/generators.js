@@ -77,24 +77,17 @@ const randomList = {
         })
       }
       else if (school?.id === '1') {
-        Array.from([  // temp
-          'Học kỳ quân đội Bộ binh sơ cấp',
-          'Học kỳ quân đội Nâng cao Đà Nẵng',
-          'Học kỳ quân đội Nâng cao Bình Định',
-          'Bootcamp Kid Extreme',
-          'Bootcamp Teen Extreme',
-          'Teen Leaders Nhật Bản',
-          'Teen Leaders Mỹ',
-          'Siêu Trí tuệ Teen-Kid'
-        ]).forEach(course => {
+        configData.CURRENT_COURSES.forEach(course => {
           Array.from(new Array(faker.datatype.number({ min: 0, max: 2 })))
             .forEach((_, classNo) => {
               const _class = {
                 schoolId: school?.id,
-                id: school?.id + '-' + course + '-' + (classNo + 1),
-                name: course + '-' + (classNo + 1),
-                classSize: faker.datatype.number({ min: 30, max: 60 }),
-                status: school?.status,
+                id: school?.id + '-' + course?.name + '-' + (classNo + 1),
+                courseId: course?.courseId,
+                name: course?.name + '-' + (classNo + 1),
+                classSize: faker.datatype.number({ min: course?.minStudents, max: course?.maxStudents }),
+                maxStudents: course?.maxStudents,   // ko biết cần ở đây ko
+                status: course?.status,
                 createdAt: Date.now(),
                 updatedAt: Date.now()
               }
@@ -182,6 +175,7 @@ const randomList = {
       Array.from(new Array(_class?.classSize)).forEach((_, idx) => {
         const student = {
           classId: _class?.id,
+          courseId: _class?.courseId,
           schoolId: _class?.schoolId,
           // id: `${idCount * _class?.classSize + idx}`,
           id: faker.datatype.uuid()?.slice(0, 4),
@@ -206,6 +200,55 @@ const randomList = {
 
     return list
   },
+  TUITION_FEES: (listStudents, listClasses) => {  // list học viên đã hoàn thành học phí
+    const getTuitionFees = courseId => {
+      return configData.COURSES?.find(({ id }) => id === courseId)?.price
+    }
+    const getFlightFees = courseId => {
+      return courseId === '8' ? 10000000    // TL
+        : courseId === '2' ? 1500000  // HKQĐ Nâng cao
+          : 0
+    }
+    const getBoardingFees = schoolId => {
+      return (schoolId === '4' && faker?.datatype?.boolean()) ? 4000000    // phổ thông
+        : 0
+    }
+    const getInsuranceFees = schoolId => {
+      return ['3', '4'].includes(schoolId) ? 150000 : 0   // phổ thông
+    }
+    const getClassName = classId => {
+      return listClasses?.find(({ id }) => id === classId)?.name
+    }
+
+    let list = []
+
+    for (const student of listStudents) {
+      if (!faker.datatype.boolean()) continue   // true: đã đóng, false: chưa đóng
+
+      list.push({
+        id: 'HP_' + faker.random.numeric(5),   // mã hóa đơn
+        schoolId: student?.schoolId,
+        studentId: student?.id,
+        studentName: student?.name,
+        className: getClassName(student?.classId),
+        tuitionFee: getTuitionFees(student?.courseId),
+        uniformFee: 500000,
+        documentsFee: 0,
+        flightFee: getFlightFees(student?.courseId),
+        boardingFee: getBoardingFees(student?.schoolId),
+        insuranceFee: getInsuranceFees(student?.schoolId),
+        note: '',
+        paidBy: faker.datatype.boolean() ? student?.name : student?.parent?.name,
+        receivedAt: '15:30,   22/02/2023',
+        receivedBy: "Cô Thúy",
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      })
+    }
+
+    return list
+  },
+
 }
 
 // export const randomListSchools = numOfSchools => {

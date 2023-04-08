@@ -4,8 +4,10 @@ export const BASE_SALARY = 1490000   // mức lương cơ sở (1,49tr/tháng) =
 
 export const userRole = {
   ACCOUNTER: 'Kế toán',
-  SCHOOL_ADMIN: 'Admin trường',
-  ADMIN: 'Admin ATY'
+  SCHOOL_ADMIN: 'Quản lý chi nhánh',
+  ADMIN: 'Quản trị hệ thống'
+  // SCHOOL_ADMIN: 'Admin trường',
+  // ADMIN: 'Admin ATY'
 }
 
 export const schoolStatus = {
@@ -34,10 +36,19 @@ export const courseStatus = {
   COMING_SOON: 'Sắp ra mắt'
 }
 export const classStatus = {
-  PERFORMING: 'Đang diễn ra',
-  ENROLLING: 'Đang tuyển sinh',
-  COMING_SOON: 'Sắp mở',
-  ENDED: 'Đã kết thúc'
+  COMING_SOON: 'Dự kiến',       // chưa diễn ra, chưa ấn định time tổ chức
+  ENROLLING: 'Đang tuyển sinh', // chưa diễn ra, đã ấn định time cụ thể
+  ON_GOING: 'Đang diễn ra',
+  ENDED: 'Đã kết thúc',
+  CANCELLED: 'Đã hủy'
+}
+
+export const activityStatus = {
+  COMING_SOON: 'Dự kiến',
+  PREPARING: 'Chuẩn bị',  // trong khoảng từ ngày thông báo --> trước lúc bắt đầu
+  ON_GOING: 'Đang diễn ra',
+  ENDED: 'Đã kết thúc',
+  CANCELLED: 'Đã hủy'
 }
 
 export const paymentMethod = {
@@ -47,7 +58,21 @@ export const paymentMethod = {
   QR: 'Quét QR'
 }
 
-export const taxStatus = {
+export const taxTypeStatus = {
   ACTIVE: 'Đang áp dụng',
   INACTIVE: 'Không áp dụng'
+}
+export const taxStatus = {
+  NOT_SUBMITTED: 'Chưa nộp',
+  SUBMITTED: 'Đã nộp'
+}
+export const taxPeriod = {
+  MONTH: 'Theo tháng',
+  QUARTER: 'Theo quý',
+  YEAR: 'Theo năm',
+}
+export const taxDeclarationType = {
+  FIRST_TIME: 'Lần đầu',
+  UPDATE_1: 'Bổ sung lần 1',
+  UPDATE_2: 'Bổ sung lần 2',
 }

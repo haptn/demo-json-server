@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import generate from './helpers.js'
-import { BASE_SALARY, staffStatus, userRole } from './constants.js'
+import { BASE_SALARY, classStatus, staffStatus, userRole } from './constants.js'
 import configData from './data.js'
 import dayjs from 'dayjs'
 
@@ -44,7 +44,7 @@ const randomList = {
           password: faker.datatype.uuid().slice(0, 6),
           avatar: faker.image.avatar(),
           address: faker.address.streetAddress(),
-          status: generate.STAFF_STATUS(),
+          status: staffStatus.WORKING,  // generate.STAFF_STATUS()  // random, mà tui thấy "đã nghỉ" hơi nhìu :v
           createdAt: Date.now(),
           updatedAt: Date.now()
         }
@@ -60,7 +60,10 @@ const randomList = {
 
     for (const school of listSchools) {
       if (['3', '4'].includes(school?.id)) {
-        Array.from([6, 7, 8, 9, 10, 11]).forEach(grade => {
+        const grades = school?.id === '3'   // Thủ Khoa Huân
+          ? [10, 11, 12] : [6, 7, 8, 9]
+
+        grades.forEach(grade => {
           Array.from(new Array(faker.datatype.number({ min: 1, max: 3 })))
             .forEach((_, classNo) => {
               const _class = {
@@ -77,22 +80,34 @@ const randomList = {
         })
       }
       else if (school?.id === '1') {
+        let totalClasses = []
+
         configData.CURRENT_COURSES.forEach(course => {
-          Array.from(new Array(faker.datatype.number({ min: 0, max: 2 })))
-            .forEach((_, classNo) => {
-              const _class = {
-                schoolId: school?.id,
-                id: school?.id + '-' + course?.name + '-' + (classNo + 1),
-                courseId: course?.courseId,
-                name: course?.name + '-' + (classNo + 1),
-                classSize: faker.datatype.number({ min: course?.minStudents, max: course?.maxStudents }),
-                maxStudents: course?.maxStudents,   // ko biết cần ở đây ko
-                status: course?.status,
-                createdAt: Date.now(),
-                updatedAt: Date.now()
-              }
-              list.push(_class)
-            })
+          if ([classStatus.CANCELLED, classStatus.COMING_SOON]  // Hủy / Dự kiến
+            ?.includes(course?.status)
+          ) {
+            totalClasses = [1]
+          }
+          else {
+            totalClasses = Array.from(new Array(
+              faker.datatype.number({ min: 1, max: 2 })
+            ))
+          }
+
+          totalClasses.forEach((_, classNo) => {
+            const _class = {
+              schoolId: school?.id,
+              id: school?.id + '-' + course?.name + '-' + (classNo + 1),
+              courseId: course?.courseId,
+              name: course?.name + '-' + (classNo + 1),
+              classSize: faker.datatype.number({ min: course?.minStudents, max: course?.maxStudents }),
+              maxStudents: course?.maxStudents,   // ko biết cần ở đây ko
+              status: course?.status,
+              createdAt: Date.now(),
+              updatedAt: Date.now()
+            }
+            list.push(_class)
+          })
         })
       }
     }
@@ -168,7 +183,6 @@ const randomList = {
   STUDENTS: (listClasses) => {
     const list = []
 
-    // let idCount = 0
     for (const _class of listClasses) {
       if (!['1', '3', '4'].includes(_class?.schoolId)) continue
 
@@ -195,14 +209,12 @@ const randomList = {
 
         list.push(student)
       })
-      // idCount++
     }
-
     return list
   },
   TUITION_FEES: (listStudents, listClasses) => {  // list học viên đã hoàn thành học phí
     const getTuitionFees = courseId => {
-      return configData.COURSES?.find(({ id }) => id === courseId)?.price
+      return configData.COURSES?.find(({ id }) => id === courseId)?.price ?? 0
     }
     const getFlightFees = courseId => {
       return courseId === '8' ? 10000000    // TL
@@ -219,11 +231,21 @@ const randomList = {
     const getClassName = classId => {
       return listClasses?.find(({ id }) => id === classId)?.name
     }
+    const getClassStatus = classId => {
+      return listClasses?.find(({ id }) => id === classId)?.status
+    }
 
     let list = []
 
     for (const student of listStudents) {
-      if (!faker.datatype.boolean()) continue   // true: đã đóng, false: chưa đóng
+      const _classStatus = getClassStatus(student?.classId)
+      if (_classStatus === classStatus.COMING_SOON)
+        continue
+      else if (
+        [classStatus.ENROLLING, classStatus.CANCELLED].includes(_classStatus)
+        && !faker.datatype.boolean()   // true: đã đóng, false: chưa đóng
+      )
+        continue
 
       list.push({
         id: 'HP_' + faker.random.numeric(5),   // mã hóa đơn
@@ -233,7 +255,7 @@ const randomList = {
         className: getClassName(student?.classId),
         tuitionFee: getTuitionFees(student?.courseId),
         uniformFee: 500000,
-        documentsFee: 0,
+        documentsFee: 60000,
         flightFee: getFlightFees(student?.courseId),
         boardingFee: getBoardingFees(student?.schoolId),
         insuranceFee: getInsuranceFees(student?.schoolId),
@@ -245,7 +267,6 @@ const randomList = {
         updatedAt: Date.now()
       })
     }
-
     return list
   },
 
